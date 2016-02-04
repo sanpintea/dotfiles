@@ -54,8 +54,23 @@ if has('lua')
   " let g:neocomplete#enable_fuzzy_completion         = 1
   " let g:neocomplete#lock_buffer_name_pattern        = '\*ku\*'
   " " }}}
-" vimrc に記述されたプラグインでインストールされていないものがないかチェックする
-NeoBundleCheck
+NeoBundle 'Shougo/vimproc'
+NeoBundleLazy 'Shougo/vimshell', {
+  \ 'depends' : 'Shougo/vimproc',
+  \ 'autoload' : {
+  \   'commands' : [{ 'name' : 'VimShell', 'complete' : 'customlist,vimshell#complete'},
+  \                 'VimShellExecute', 'VimShellInteractive',
+  \                 'VimShellTerminal', 'VimShellPop'],
+  \   'mappings' : ['<Plug>(vimshell_switch)']
+  \ }}
+
+" vimshell {{{
+" nmap <silent> vs :<C-u>VimShell<CR>
+" nmap <silent> vp :<C-u>VimShellPop<CR>
+" " }}}
+  " vimrc に記述されたプラグインでインストールされていないものがないかチェックする
+NeoBundle 'Townk/vim-autoclose'
+  NeoBundleCheck
 call neobundle#end()
 filetype plugin indent on
 " どうせだから jellybeans カラースキーマを使ってみましょう
