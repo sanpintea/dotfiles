@@ -30,6 +30,7 @@ let g:neobundle_default_git_protocol='https'
 " neobundle#begin - neobundle#end の間に導入するプラグインを記載します。
 NeoBundleFetch 'Shougo/neobundle.vim'
 " ↓こんな感じが基本の書き方
+NeoBundle 'mattn/emmet-vim'
 NeoBundle 'nanotech/jellybeans.vim'
 NeoBundle 'Shougo/neomru.vim', {
   \ 'depends' : 'Shougo/unite.vim'
@@ -55,6 +56,7 @@ if has('lua')
   " let g:neocomplete#lock_buffer_name_pattern        = '\*ku\*'
   " " }}}
 NeoBundle 'Shougo/vimproc'
+NeoBundle 'tomtom/tcomment_vim'
 NeoBundleLazy 'Shougo/vimshell', {
   \ 'depends' : 'Shougo/vimproc',
   \ 'autoload' : {
