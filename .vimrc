@@ -10,7 +10,7 @@ set confirm
 set hidden
 set nobackup
 set noswapfile
-
+set tabstop=4
 
 " neobundle settings {{{
 if has('vim_starting')
