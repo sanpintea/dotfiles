@@ -85,3 +85,4 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 export GOPATH="C:\cygwin64\home\takeshi\go"
+
