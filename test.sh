@@ -2,7 +2,7 @@ host=`hostname`
 if  [ ${host} = "ubuntu" ] 
 then
 		export TEST="ubuntu"
-elif [ `hostname` = "mypc" ]
+elif [ ${host} = "mypc" ]
 then
 		export TEST="mypc"
 else
