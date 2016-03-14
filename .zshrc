@@ -87,10 +87,10 @@ source $ZSH/oh-my-zsh.sh
 host=`hostname`
 if  [ ${host} = "ubuntu" ]
 then
-	                export OSTYPE="ubuntu"
-elif [ ${host} = "mypc" ]
-then
-export PATH="/usr/local/bin:/usr/bin:/cygdrive/c/Windows/system32:/cygdrive/c/Windows:/cygdrive/c/Windows/System32/Wbem:/cygdrive/c/Windows/System32/WindowsPowerShell/v1.0:/cygdrive/c/HashiCorp/Vagrant/bin:/usr/bin:/sbin:/cygdrive/c/Program Files/Git/cmd:/cygdrive/c/Program Files/Git/usr/bin:/cygdrive/c/MinGW/msys/1.0/bin:/cygdrive/c/MinGW/bin:/cygdrive/c/Go/bin:/cygdrive/c/Ruby22-x64/bin:/cygdrive/c/Users/takeshi/AppData/Local/atom/bin:/usr/lib/lapack:/home/takeshi/bin:/home/takeshi/go/bin"
-export GOPATH="C:\cygwin64\home\takeshi\go"
-else
+			export OSTYPE="ubuntu"
+		elif [ ${host} = "mypc" ]
+		then
+				export PATH="/usr/local/bin:/usr/bin:/cygdrive/c/Windows/system32:/cygdrive/c/Windows:/cygdrive/c/Windows/System32/Wbem:/cygdrive/c/Windows/System32/WindowsPowerShell/v1.0:/cygdrive/c/HashiCorp/Vagrant/bin:/usr/bin:/sbin:/cygdrive/c/Program Files/Git/cmd:/cygdrive/c/Program Files/Git/usr/bin:/cygdrive/c/MinGW/msys/1.0/bin:/cygdrive/c/MinGW/bin:/cygdrive/c/Go/bin:/cygdrive/c/Ruby22-x64/bin:/cygdrive/c/Users/takeshi/AppData/Local/atom/bin:/usr/lib/lapack:/home/takeshi/bin:/home/takeshi/go/bin"
+				export GOPATH="C:\cygwin64\home\takeshi\go"
+		else
 fi

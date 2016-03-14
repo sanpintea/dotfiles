@@ -1,11 +1,16 @@
-host=`hostname`
-if  [ ${host} = "ubuntu" ] 
-then
-		export TEST="ubuntu"
-elif [ ${host} = "mypc" ]
-then
-		export TEST="mypc"
-else
-		export TEST="none"
+if [ `hostname` = "mypc" ]; then
+		msys=`env | grep MSYSTEM=` 
+	if [ "${msys}" = "MSYSTEM=MSYS" ]; then
+		echo "msys"
+	elif [ "${msys}" =  MSYSTEM=MINGW32 ]; then
+		echo "mingw32"
+	else
+		echo "cygwin"	
+	fi
 fi
 
+	
+# msys=`env | grep MSYSTEM=`
+# if [ "${msys}" = "MSYSTEM=MSYS" ] ; then
+# echo $msys
+# fi

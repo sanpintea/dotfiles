@@ -199,3 +199,5 @@
 alias vi=vim
 alias ls='ls --color=auto --show-control-chars'
 export LS_COLORS="no=00:fi=00:di=01;36:ln=01;34"
+
+
