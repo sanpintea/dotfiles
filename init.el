@@ -3,10 +3,10 @@
 ;;;時刻表示
 (display-time)
 ;;; ロードパスの追加
-(setq load-path (append
-                 '("~/.emacs.d"
-                   "~/.emacs.d/packages")
-                 load-path))
+;;;(setq load-path (append
+;;;                 '("c:/Users/takeshi/.emacs.d"
+;;;                   "c:/Users/takeshi/.emacs.d/packages")
+;;;                 load-path))
 ;;; Localeに合わせた環境の設定
 (set-locale-environment nil)
 (set-language-environment "Japanese")
@@ -16,6 +16,24 @@
 (setq default-buffer-file-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
 (prefer-coding-system 'utf-8)
+;; スタートアップメッセージを表示させない
+(setq inhibit-startup-message t)
+;; メニューバーを消す
+(menu-bar-mode -1)
+
+;;ミニバッファでコマンド実行
+(setq enable-recursive-minibuffers t) 
+;; ツールバーを消す
+;; (tool-bar-mode -1)
+
+;;行番号表示
+(global-linum-mode t)
+
+;; 予約語を色分けする
+(global-font-lock-mode t)
+
+;; C-x C-b でバッファリストを開く時に、ウィンドウを分割しない
+(global-set-key "\C-x\C-b" 'buffer-menu)
 
 ;;; 現在行を目立たせる
 (global-hl-line-mode)
