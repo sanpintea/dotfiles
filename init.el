@@ -21,8 +21,6 @@
 ;; メニューバーを消す
 (menu-bar-mode -1)
 
-;;ミニバッファでコマンド実行
-(setq enable-recursive-minibuffers t) 
 ;; ツールバーを消す
 ;; (tool-bar-mode -1)
 
