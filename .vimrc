@@ -30,6 +30,7 @@ let g:neobundle_default_git_protocol='https'
 " neobundle#begin - neobundle#end の間に導入するプラグインを記載します。
 NeoBundleFetch 'Shougo/neobundle.vim'
 " ↓こんな感じが基本の書き方
+NeoBundle 'bundle/tern_for_vim'
 NeoBundle 'fatih/vim-go'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'nanotech/jellybeans.vim'
