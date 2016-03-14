@@ -3,10 +3,12 @@
 ;;;時刻表示
 (display-time)
 ;;; ロードパスの追加
+
 ;;;(setq load-path (append
 ;;;                 '("c:/Users/takeshi/.emacs.d"
 ;;;                   "c:/Users/takeshi/.emacs.d/packages")
 ;;;                 load-path))
+
 ;;; Localeに合わせた環境の設定
 (set-locale-environment nil)
 (set-language-environment "Japanese")
@@ -80,13 +82,16 @@
 (setq company-minimum-prefix-length 2) ; デフォルトは4
 (setq company-selection-wrap-around t) ; 候補の一番下でさらに下に行こうとすると一番上に戻る
 
-;; (setq company-tern-property-marker "")
-;; (defun company-tern-depth (candidate)
-;;   "Return depth attribute for CANDIDATE. 'nil' entries are treated as 0."
-;;   (let ((depth (get-text-property 0 'depth candidate)))
-;;     (if (eq depth nil) 0 depth)))
-;; (add-hook 'js2-mode-hook 'tern-mode) ; 自分が使っているjs用メジャーモードに変える
-;; (add-to-list 'company-backends 'company-tern) ; backendに追加
+(setq company-tern-property-marker "")
+(defun company-tern-depth (candidate)
+  "Return depth attribute for CANDIDATE. 'nil' entries are treated as 0."
+  (let ((depth (get-text-property 0 'depth candidate)))
+    (if (eq depth nil) 0 depth)))
+(add-hook 'js2-mode-hook 'tern-mode) ; 自分が使っているjs用メジャーモードに変える
+(add-to-list 'company-backends 'company-tern) ; backendに追加
 ;;;(add-to-list 'company-backends '(company-tern :with company-dabbrev-code))
 
+
+(autoload 'js2-mode "js2" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
