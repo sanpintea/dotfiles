@@ -72,3 +72,5 @@
 (add-hook 'js2-mode-hook 'tern-mode) ; 自分が使っているjs用メジャーモードに変える
 (add-to-list 'company-backends 'company-tern) ; backendに追加
 ;;;(add-to-list 'company-backends '(company-tern :with company-dabbrev-code))
+
+
