@@ -64,6 +64,25 @@
 ;; カーソルの点滅をやめる
 (blink-cursor-mode 0)
 
+;; 起動時のウィンドウサイズ、色などを設定
+(if (boundp 'window-system)
+    (setq default-frame-alist
+          (append (list
+                   '(foreground-color . "black")  ; 文字色
+                   '(background-color . "white")  ; 背景色
+                   '(border-color     . "white")  ; ボーダー色
+                   '(mouse-color      . "black")  ; マウスカーソルの色
+                   '(cursor-color     . "black")  ; カーソルの色
+                   '(cursor-type      . box)      ; カーソルの形状
+                   '(top . 50) ; ウィンドウの表示位置（Y座標）
+                   '(left . 200) ; ウィンドウの表示位置（X座標）
+                   '(width . 80) ; ウィンドウの幅（文字数）
+                   '(height . 40) ; ウィンドウの高さ（文字数）
+                   )
+                  default-frame-alist)))
+(setq initial-frame-alist default-frame-alist )
+
+
 (require 'package) ;; You might already have this line
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/"))
@@ -76,9 +95,8 @@
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 
 
-(require 'company)
 (global-company-mode) ; 全バッファで有効にする 
-(setq company-idle-delay 0) ; デフォルトは0.5
+(setq company-idle-delay 0.3) ; デフォルトは0.5
 (setq company-minimum-prefix-length 2) ; デフォルトは4
 (setq company-selection-wrap-around t) ; 候補の一番下でさらに下に行こうとすると一番上に戻る
 
@@ -95,3 +113,5 @@
 (autoload 'js2-mode "js2" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
+;;(add-hook 'after-init-hook 'global-company-mode)
+(add-hook 'ruby-mode-hook 'company-mode)
