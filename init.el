@@ -4,10 +4,10 @@
 (display-time)
 ;;; ロードパスの追加
 
-;;;(setq load-path (append
-;;;                 '("c:/Users/takeshi/.emacs.d"
-;;;                   "c:/Users/takeshi/.emacs.d/packages")
-;;;                 load-path))
+ (setq load-path (append
+                  '("~/.emacs.d/elpa"
+                    "~/.emacs.d/packages")
+load-path))
 
 ;;; Localeに合わせた環境の設定
 (set-locale-environment nil)
@@ -105,13 +105,19 @@
   "Return depth attribute for CANDIDATE. 'nil' entries are treated as 0."
   (let ((depth (get-text-property 0 'depth candidate)))
     (if (eq depth nil) 0 depth)))
-(add-hook 'js2-mode-hook 'tern-mode) ; 自分が使っているjs用メジャーモードに変える
-(add-to-list 'company-backends 'company-tern) ; backendに追加
+;;(add-hook 'js2-mode-hook 'tern-mode) ; 自分が使っているjs用メジャーモードに変える
+;;(add-to-list 'company-backends 'company-tern) ; backendに追加
+
+(add-to-list 'company-backends '(company-tern :with company-dabbrev-code))
+
 ;;;(add-to-list 'company-backends '(company-tern :with company-dabbrev-code))
 
 
-(autoload 'js2-mode "js2" nil t)
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+;;(autoload 'js2-mode "js2" nil t)
+;;(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 
 ;;(add-hook 'after-init-hook 'global-company-mode)
-(add-hook 'ruby-mode-hook 'company-mode)
+;;(add-hook 'ruby-mode-hook 'company-mode)
+
+;(autoload 'undo-tree-mode "undo-tree-mode" nil t)
+;;(require 'undo-tree)
