@@ -116,19 +116,16 @@ load-path))
 (el-get-bundle ac-js2)
 (el-get-bundle company)
 (el-get-bundle popup)
-;;(el-get-bundle auto-complete)
 (el-get-bundle js2-mode)
 (el-get-bundle company-tern)
 (el-get-bundle anzu)
 (el-get-bundle diminish)
 
+
 ;;パッケージ毎の設定
 (require 'diminish)
 
 (require 'anzu)
-;; (require 'auto-complete)
-;; (require 'auto-complete-config)    ; 必須ではないですが一応
-;;(global-auto-complete-mode t)
 
 (global-company-mode) ; 全バッファで有効にする 
 (setq company-idle-delay 0.3) ; デフォルトは0.5
