@@ -128,10 +128,9 @@ load-path))
 (require 'anzu)
 ;; (require 'auto-complete)
 ;; (require 'auto-complete-config)    ; 必須ではないですが一応
-;; (global-auto-complete-mode t)
+;;(global-auto-complete-mode t)
 
 (global-company-mode) ; 全バッファで有効にする 
-(add-hook 'ruby-mode-hook 'company-mode)
 (setq company-idle-delay 0.3) ; デフォルトは0.5
 (setq company-minimum-prefix-length 2) ; デフォルトは4
 (setq company-selection-wrap-around t) ; 候補の一番下でさらに下に行こうとすると一番上に戻る
@@ -143,8 +142,8 @@ load-path))
     (if (eq depth nil) 0 depth)))
 ;;(add-hook 'js2-mode-hook 'tern-mode) ; 自分が使っているjs用メジャーモードに変える
 (add-to-list 'company-backends 'company-tern) ; backendに追加
-(global-anzu-mode +1)
 
+(global-anzu-mode +1)
 (diminish 'anzu-mode "Az")
 (diminish 'company-mode "Comp")
 
