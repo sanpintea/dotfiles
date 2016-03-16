@@ -2,6 +2,7 @@
   (setq user-emacs-directory (file-name-directory load-file-name)))
 
 ;;el-getの設定
+
 (add-to-list 'load-path (locate-user-emacs-file "el-get/el-get"))
 (unless (require 'el-get nil 'noerror)
   (with-current-buffer
@@ -10,6 +11,18 @@
     (goto-char (point-max))
     (eval-print-last-sexp)))
 
+;;パッケージインストールリスト
+(el-get-bundle emmet-mode)
+(el-get-bundle helm)
+(el-get-bundle ac-js2)
+(el-get-bundle company)
+(el-get-bundle popup)
+(el-get-bundle js2-mode)
+(el-get-bundle company-tern)
+(el-get-bundle anzu)
+(el-get-bundle diminish)
+(el-get-bundle rainbow-delimiters)
+(el-get-bundle auto-complete)
 
 ;;; ロードパスの追加
  (setq load-path (append
@@ -36,7 +49,7 @@ load-path))
 ;; メニューバーを消す
 (menu-bar-mode -1)
 ;; ツールバーを消す
-;; (tool-bar-mode -1)
+(tool-bar-mode -1)
 
 ;;行番号表示
 (global-linum-mode t)
@@ -97,6 +110,9 @@ load-path))
                   default-frame-alist)))
 (setq initial-frame-alist default-frame-alist )
 
+(set-face-background 'default "#303030")
+(set-face-foreground 'default "#F0F8FF")
+
 ;;パッケージ管理
 (require 'package) ;; You might already have this line
 (add-to-list 'package-archives
@@ -110,16 +126,6 @@ load-path))
              '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 (package-initialize) ;; You might already have this line
-
-;;パッケージインストールリスト
-(el-get-bundle helm)
-(el-get-bundle ac-js2)
-(el-get-bundle company)
-(el-get-bundle popup)
-(el-get-bundle js2-mode)
-(el-get-bundle company-tern)
-(el-get-bundle anzu)
-(el-get-bundle diminish)
 
 
 ;;パッケージ毎の設定
@@ -143,6 +149,8 @@ load-path))
 (global-anzu-mode +1)
 (diminish 'anzu-mode "Az")
 (diminish 'company-mode "Comp")
+
+
 
 
 
