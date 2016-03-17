@@ -12,6 +12,7 @@
     (eval-print-last-sexp)))
 
 ;;パッケージインストールリスト
+(el-get-bundle pkg-info)
 (el-get-bundle yasnippet)
 (el-get-bundle emmet-mode)
 (el-get-bundle helm)
@@ -42,7 +43,7 @@ load-path))
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (set-buffer-file-coding-system 'utf-8)
-(setq default-buffer-file-coding-system 'utf-8)
+;;(setq buffer-file-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
 (prefer-coding-system 'utf-8)
 ;; スタートアップメッセージを表示させない
@@ -134,17 +135,21 @@ load-path))
 
 ;;パッケージ管理
 (require 'package) ;; You might already have this line
-(add-to-list 'package-archives
-             '("melpa" . "https://melpa.org/packages/"))
+;;(add-to-list 'package-archives
+;;             '("melpa" . "https://melpa.org/packages/"))
 ;; (when (< emacs-major-version 24)
 ;;   ;; For important compatibility libraries like cl-lib
 ;;   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
 ;;   )
 
 
+;;(add-to-list 'package-archives
+;;            '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+;;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+
 (add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+'("melpa-stable" . "http://melpa-stable.milkbox.net/packages/") t)
+
 (package-initialize) ;; You might already have this line
 
 
@@ -174,6 +179,9 @@ load-path))
     (if (eq depth nil) 0 depth)))
 ;;(add-hook 'js2-mode-hook 'tern-mode) ; 自分が使っているjs用メジャーモードに変える
 (add-to-list 'company-backends 'company-tern) ; backendに追加
+
+;(require 'js2-mode)
+;(add-to-list 'auto-mode-alist '("\\.js\\" . js2-mode))
 
 (global-anzu-mode +1)
 (diminish 'anzu-mode "az")
