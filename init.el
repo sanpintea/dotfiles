@@ -110,6 +110,10 @@ load-path))
                   default-frame-alist)))
 (setq initial-frame-alist default-frame-alist )
 
+;;フォントファミリーの設定
+(add-to-list 'default-frame-alist '(font . "Ricty Diminished" ))
+(set-face-attribute 'default t :font "Ricty Diminished" )
+
 ;;パッケージ管理
 (require 'package) ;; You might already have this line
 (add-to-list 'package-archives
@@ -135,14 +139,15 @@ load-path))
 (yas-global-mode 1)
 
 (require 'diminish)
-
+(require 'tern)
 (require 'anzu)
 
 (global-company-mode) ; 全バッファで有効にする 
 (setq company-idle-delay 0.3) ; デフォルトは0.5
 (setq company-minimum-prefix-length 2) ; デフォルトは4
 (setq company-selection-wrap-around t) ; 候補の一番下でさらに下に行こうとすると一番上に戻る
-
+(tern-mode t)
+(company-tern t)
 (setq company-tern-property-marker "")
 (defun company-tern-depth (candidate)
   "Return depth attribute for CANDIDATE. 'nil' entries are treated as 0."
