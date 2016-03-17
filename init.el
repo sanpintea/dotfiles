@@ -12,6 +12,7 @@
     (eval-print-last-sexp)))
 
 ;;パッケージインストールリスト
+(el-get-bundle yasnippet)
 (el-get-bundle emmet-mode)
 (el-get-bundle helm)
 (el-get-bundle ac-js2)
@@ -96,11 +97,11 @@ load-path))
 (if (boundp 'window-system)
     (setq default-frame-alist
           (append (list
-                   '(foreground-color . "black")  ; 文字色
-                   '(background-color . "white")  ; 背景色
-                   '(border-color     . "white")  ; ボーダー色
-                   '(mouse-color      . "black")  ; マウスカーソルの色
-                   '(cursor-color     . "black")  ; カーソルの色
+                   ;; '(foreground-color . "black")  ; 文字色
+                   ;; '(background-color . "white")  ; 背景色
+                   ;; '(border-color     . "white")  ; ボーダー色
+                   ;; '(mouse-color      . "black")  ; マウスカーソルの色
+                   ;;'(cursor-color     . "black") ; カーソルの色
                    '(cursor-type      . box)      ; カーソルの形状
                    '(top . 50) ; ウィンドウの表示位置（Y座標）
                    '(left . 200) ; ウィンドウの表示位置（X座標）
@@ -110,8 +111,6 @@ load-path))
                   default-frame-alist)))
 (setq initial-frame-alist default-frame-alist )
 
-(set-face-background 'default "#303030")
-(set-face-foreground 'default "#F0F8FF")
 
 ;;パッケージ管理
 (require 'package) ;; You might already have this line
@@ -129,6 +128,14 @@ load-path))
 
 
 ;;パッケージ毎の設定
+(require 'yasnippet)
+(setq yas-snippet-dirs
+      '("~/.emacs.d/mySnippets" 
+        ))
+
+;; yas起動
+(yas-global-mode 1)
+
 (require 'diminish)
 
 (require 'anzu)
@@ -147,11 +154,8 @@ load-path))
 (add-to-list 'company-backends 'company-tern) ; backendに追加
 
 (global-anzu-mode +1)
-(diminish 'anzu-mode "Az")
-(diminish 'company-mode "Comp")
+(diminish 'anzu-mode "az")
+(diminish 'company-mode "Cmp")
+(diminish 'helm-mode "h")
 
-
-
-
-
-
+(load-theme 'deeper-blue)
