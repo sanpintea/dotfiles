@@ -97,6 +97,8 @@ load-path))
                   default-frame-alist)))
 (setq initial-frame-alist default-frame-alist )
 
+
+
 ;;パッケージ管理
 (require 'package) ;; You might already have this line
 (add-to-list 'package-archives
