@@ -111,8 +111,26 @@ load-path))
 (setq initial-frame-alist default-frame-alist )
 
 ;;フォントファミリーの設定
-(add-to-list 'default-frame-alist '(font . "Ricty Diminished" ))
+;;(frame-parameter nil 'font)をscratchで実行して情報を調べる
+;;(add-to-list 'default-frame-alist '(font . "Ricty Diminished" ))
+(add-to-list 'default-frame-alist '(font . "-outline-Ricty Diminished-normal-normal-normal-mono-16-*-*-*-c-*-iso8859-1" ))
+
 (set-face-attribute 'default t :font "Ricty Diminished" )
+
+;;全角スペース等を表示する
+(setq whitespace-style
+      '(tabs tab-mark spaces space-mark))
+(setq whitespace-space-regexp "\\(\x3000+\\)")
+(setq whitespace-display-mappings
+      '((space-mark ?\x3000 [?\□])
+        (tab-mark   ?\t   [?\xBB ?\t])
+        ))
+(require 'whitespace)
+(global-whitespace-mode 1)
+(set-face-foreground 'whitespace-space "LightSlateGray")
+(set-face-background 'whitespace-space "DarkSlateGray")
+(set-face-foreground 'whitespace-tab "LightSlateGray")
+(set-face-background 'whitespace-tab "DarkSlateGray")
 
 ;;パッケージ管理
 (require 'package) ;; You might already have this line
