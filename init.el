@@ -35,6 +35,7 @@ load-path))
 (el-get-bundle auto-compile)
 (el-get-bundle migemo)
 
+;;======================================  emacs環境の設定 始まり
 ;;;対応するカッコを強調表示
 (show-paren-mode t)
 ;;;時刻表示
@@ -123,6 +124,22 @@ load-path))
 
 (set-face-attribute 'default t :font "Ricty Diminished" )
 
+;; scratchの初期メッセージ消去
+(setq initial-scratch-message "")
+;; タイトルバーにファイルのフルパス表示
+(setq frame-title-format
+      (format "%%f - Emacs@%s" (system-name)))
+;; 括弧の範囲内を強調表示
+(show-paren-mode t)
+(setq show-paren-delay 0)
+(setq show-paren-style 'expression)
+
+;; 括弧の範囲色
+(set-face-background 'show-paren-match-face "#500")
+;; 選択領域の色
+(set-face-background 'region "#555")
+
+
 ;;全角スペース等を表示する
 (setq whitespace-style
       '(tabs tab-mark spaces space-mark))
@@ -137,6 +154,8 @@ load-path))
 (set-face-background 'whitespace-space "DarkSlateGray")
 (set-face-foreground 'whitespace-tab "LightSlateGray")
 (set-face-background 'whitespace-tab "DarkSlateGray")
+
+;;================================================  emacs環境の設定 終わり
 
 ;;パッケージ管理
 (require 'package) ;; You might already have this line
@@ -195,30 +214,12 @@ load-path))
 
 (load-theme 'deeper-blue)
 
-;; scratchの初期メッセージ消去
-(setq initial-scratch-message "")
-;; タイトルバーにファイルのフルパス表示
-(setq frame-title-format
-      (format "%%f - Emacs@%s" (system-name)))
-;; 括弧の範囲内を強調表示
-(show-paren-mode t)
-(setq show-paren-delay 0)
-(setq show-paren-style 'expression)
-
-;; 括弧の範囲色
-(set-face-background 'show-paren-match-face "#500")
-;; 選択領域の色
-(set-face-background 'region "#555")
-
 
 ;;migemo-----------------------------------------------------
 (require 'migemo)
 (setq migemo-command "cmigemo")
 (setq migemo-options '("-q" "--emacs"))
-
-;; Set your installed path
 (setq migemo-dictionary "C:\\cmigemo-default-win64\\dict\\utf-8\\migemo-dict")
-
 (setq migemo-user-dictionary nil)
 (setq migemo-regex-dictionary nil)
 (setq migemo-coding-system 'utf-8-unix)
