@@ -8,7 +8,7 @@
                     )
 load-path))
 
-;;el-getの設定
+;;パッケージ管理 el-getの設定
 
 (add-to-list 'load-path (locate-user-emacs-file "el-get/el-get"))
 (unless (require 'el-get nil 'noerror)
@@ -40,6 +40,11 @@ load-path))
 (show-paren-mode t)
 ;;;時刻表示
 (display-time)
+;; (setq display-time-string-forms
+;;        '((propertize (concat " " 24-hours ":" minutes " ")
+;;  		    'face 'egoge-displaeey-time)))
+(setq display-time-format "%m/%d (%a) %H:%M")
+
 ;;; Localeに合わせた環境の設定
 (set-locale-environment nil)
 (set-language-environment "Japanese")
@@ -111,7 +116,7 @@ load-path))
                    '(cursor-type      . box)      ; カーソルの形状
                    '(top . 50) ; ウィンドウの表示位置（Y座標）
                    '(left . 200) ; ウィンドウの表示位置（X座標）
-                   '(width . 80) ; ウィンドウの幅（文字数）
+                   '(width . 100) ; ウィンドウの幅（文字数）
                    '(height . 40) ; ウィンドウの高さ（文字数）
                    )
                   default-frame-alist)))
@@ -155,9 +160,27 @@ load-path))
 (set-face-foreground 'whitespace-tab "LightSlateGray")
 (set-face-background 'whitespace-tab "DarkSlateGray")
 
+;; モードラインの割合表示を総行数表示
+(defvar my-lines-page-mode t)
+(defvar my-mode-line-format)
+(when my-lines-page-mode
+  (setq my-mode-line-format "%d")
+  (if size-indication-mode
+      (setq my-mode-line-format (concat my-mode-line-format " of %%I")))
+  (cond ((and (eq line-number-mode t) (eq column-number-mode t))
+         (setq my-mode-line-format (concat my-mode-line-format " (%%l,%%c)")))
+        ((eq line-number-mode t)
+         (setq my-mode-line-format (concat my-mode-line-format " L%%l")))
+        ((eq column-number-mode t)
+         (setq my-mode-line-format (concat my-mode-line-format " C%%c"))))
+
+  (setq mode-line-position
+        '(:eval (format my-mode-line-format
+                        (count-lines (point-max) (point-min))))))
+
 ;;================================================  emacs環境の設定 終わり
 
-;;パッケージ管理
+;;パッケージ管理 package
 (require 'package) ;; You might already have this line
 ;;(add-to-list 'package-archives
 ;;             '("melpa" . "https://melpa.org/packages/"))
@@ -220,7 +243,7 @@ load-path))
 (setq migemo-command "cmigemo")
 (setq migemo-options '("-q" "--emacs"))
 (when (equal window-system 'w32)
-(setq migemo-dictionary "C:\\cmigemo-default-win64\\dict\\utf-8\\migemo-dict"))
+  (setq migemo-dictionary "C:\\cmigemo-default-win64\\dict\\utf-8\\migemo-dict"))
 (when (equal window-system 'x)
   (setq migemo-dictionary "/usr/share/cmigemo/utf-8/migemo-dict"))
 (setq migemo-user-dictionary nil)
@@ -235,4 +258,5 @@ load-path))
 (require 'auto-compile)
 (auto-compile-on-save-mode)
 ;;--------------------------------------------------------------
+
 
