@@ -63,7 +63,6 @@ load-path))
 ;; スクロールバー非表示
 (set-scroll-bar-mode nil)
 
-
 ;;行番号表示
 (global-linum-mode t)
 
@@ -178,6 +177,22 @@ load-path))
         '(:eval (format my-mode-line-format
                         (count-lines (point-max) (point-min))))))
 
+(load-theme 'monokai t)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   (quote
+    ("38ba6a938d67a452aeb1dada9d7cdeca4d9f18114e9fc8ed2b972573138d4664" "2da65cb7074c176ca0a33f06bcc83ef692c9175e41b6370f5e94eb5811d6ee3a" default))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+
 ;;================================================  emacs環境の設定 終わり
 
 ;;パッケージ管理 package
@@ -235,7 +250,7 @@ load-path))
 (diminish 'company-mode "Cmp")
 (diminish 'helm-mode "h")
 
-(load-theme 'deeper-blue)
+
 
 
 ;;migemo-----------------------------------------------------
