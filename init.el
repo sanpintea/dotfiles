@@ -1,6 +1,13 @@
 (when load-file-name
   (setq user-emacs-directory (file-name-directory load-file-name)))
 
+;;; ロードパスの追加
+ (setq load-path (append
+                  '("~/.emacs.d/elpa"
+                    "~/.emacs.d/el-get"
+                    )
+load-path))
+
 ;;el-getの設定
 
 (add-to-list 'load-path (locate-user-emacs-file "el-get/el-get"))
@@ -25,13 +32,8 @@
 (el-get-bundle diminish)
 (el-get-bundle rainbow-delimiters)
 (el-get-bundle auto-complete)
-
-;;; ロードパスの追加
- (setq load-path (append
-                  '("~/.emacs.d/elpa"
-                    "~/.emacs.d/el-get"
-                    "~/.emacs.d/packages")
-load-path))
+(el-get-bundle auto-compile)
+(el-get-bundle migemo)
 
 ;;;対応するカッコを強調表示
 (show-paren-mode t)
@@ -52,6 +54,9 @@ load-path))
 (menu-bar-mode -1)
 ;; ツールバーを消す
 (tool-bar-mode -1)
+;; スクロールバー非表示
+(set-scroll-bar-mode nil)
+
 
 ;;行番号表示
 (global-linum-mode t)
@@ -189,3 +194,40 @@ load-path))
 (diminish 'helm-mode "h")
 
 (load-theme 'deeper-blue)
+
+;; scratchの初期メッセージ消去
+(setq initial-scratch-message "")
+;; タイトルバーにファイルのフルパス表示
+(setq frame-title-format
+      (format "%%f - Emacs@%s" (system-name)))
+;; 括弧の範囲内を強調表示
+(show-paren-mode t)
+(setq show-paren-delay 0)
+(setq show-paren-style 'expression)
+
+;; 括弧の範囲色
+(set-face-background 'show-paren-match-face "#500")
+;; 選択領域の色
+(set-face-background 'region "#555")
+
+
+;;migemo-----------------------------------------------------
+(require 'migemo)
+(setq migemo-command "cmigemo")
+(setq migemo-options '("-q" "--emacs"))
+
+;; Set your installed path
+(setq migemo-dictionary "C:\\cmigemo-default-win64\\dict\\utf-8\\migemo-dict")
+
+(setq migemo-user-dictionary nil)
+(setq migemo-regex-dictionary nil)
+(setq migemo-coding-system 'utf-8-unix)
+(load-library "migemo")
+(migemo-init)
+;;--------------------------------------------------------------
+;;auto-compile
+(setq load-prefer-newer t)
+(package-initialize)
+(require 'auto-compile)
+(auto-compile-on-save-mode)
+;;--------------------------------------------------------------
