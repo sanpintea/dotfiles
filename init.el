@@ -10,7 +10,7 @@ load-path))
 
 ;;パッケージ管理 el-getの設定
 
-(add-to-list 'load-path (locate-user-emacs-file "el-get/el-get"))
+(add-to-list 'load-path (locate-user-emacs-file "~/.emacs.d/el-get/el-get"))
 (unless (require 'el-get nil 'noerror)
   (with-current-buffer
       (url-retrieve-synchronously
@@ -19,6 +19,7 @@ load-path))
     (eval-print-last-sexp)))
 
 ;;パッケージインストールリスト
+(el-get-bundle minimap)
 (el-get-bundle pkg-info)
 (el-get-bundle yasnippet)
 (el-get-bundle emmet-mode)
@@ -44,15 +45,15 @@ load-path))
 ;; (setq display-time-string-forms
 ;;        '((propertize (concat " " 24-hours ":" minutes " ")
 ;;  		    'face 'egoge-displaeey-time)))
-(setq display-time-format "%m/%d (%a) %H:%M")
-
+;;(setq display-time-format "%m/%d (%a) %H:%M")
+(setq display-time-format "%d日 %H:%M")
 ;;; Localeに合わせた環境の設定
 (set-locale-environment nil)
 (set-language-environment "Japanese")
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
 (set-buffer-file-coding-system 'utf-8)
-;;(setq buffer-file-coding-system 'utf-8)
+(setq buffer-file-coding-system 'utf-8)
 (set-default-coding-systems 'utf-8)
 (prefer-coding-system 'utf-8)
 ;; スタートアップメッセージを表示させない
@@ -179,7 +180,7 @@ load-path))
                         (count-lines (point-max) (point-min))))))
 
 (when (equal window-system 'w32)
-(setq default-directory "C:/Users/takeshi"))
+(setq default-directory "C:/Users/takeshi/"))
 
 ;;================================================  emacs環境の設定 終わり
 
@@ -204,6 +205,10 @@ load-path))
 
 
 ;;パッケージ毎の設定
+;;; smooth-scroll
+(require 'smooth-scroll)
+(smooth-scroll-mode t)
+
 (require 'yasnippet)
 (setq yas-snippet-dirs
       '("~/.emacs.d/mySnippets" 
@@ -239,8 +244,6 @@ load-path))
 (diminish 'helm-mode "h")
 
 
-
-
 ;;migemo-----------------------------------------------------
 (require 'migemo)
 (setq migemo-command "cmigemo")
@@ -256,16 +259,14 @@ load-path))
 (migemo-init)
 ;;--------------------------------------------------------------
 ;;auto-compile
-(setq load-prefer-newer t)
-(package-initialize)
-(require 'auto-compile)
-(auto-compile-on-save-mode)
+;; (setq load-prefer-newer t)
+;; (package-initialize)
+;; (require 'auto-compile)
+;; (auto-compile-on-save-mode)
 ;;--------------------------------------------------------------
 
-;; (require 'color-theme)
-;; (color-theme-initialize)
-;; (color-theme-monokai) 
-;; (color-theme-monokai)
+(smartparens-global-mode)
+(minimap-mode)
 
 (load-theme 'monokai t)
 (custom-set-variables
@@ -275,7 +276,9 @@ load-path))
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("38ba6a938d67a452aeb1dada9d7cdeca4d9f18114e9fc8ed2b972573138d4664" default))))
+    ("38ba6a938d67a452aeb1dada9d7cdeca4d9f18114e9fc8ed2b972573138d4664" default)))
+ '(minimap-always-recenter nil)
+ '(minimap-window-location (quote right)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
