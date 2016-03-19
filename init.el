@@ -19,6 +19,7 @@ load-path))
     (eval-print-last-sexp)))
 
 ;;パッケージインストールリスト
+(el-get-bundle ace-jump-mode)
 (el-get-bundle minimap)
 (el-get-bundle pkg-info)
 (el-get-bundle yasnippet)
@@ -265,15 +266,25 @@ load-path))
 ;; (require 'auto-compile)
 ;; (auto-compile-on-save-mode)
 ;;--------------------------------------------------------------
-
+;;minimap
 (minimap-mode)
 
+;;move-text
 (require 'move-text)
 (move-text-default-bindings)
 (global-set-key [down] 'move-text-down)
 (global-set-key [up] 'move-text-up)
 
+;;ace-jump-mode
+(autoload
+      'ace-jump-mode
+      "ace-jump-mode"
+      "Emacs quick move minor mode"
+      t)
+(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 
+
+;;Themeの設定
 (load-theme 'monokai t)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
