@@ -95,6 +95,7 @@ load-path))
 ;; タブにスペースを使用する
 (setq-default tab-width 4 indent-tabs-mode nil)
 
+
 ;; ウィンドウを透明にする
 ;; アクティブウィンドウ／非アクティブウィンドウ（alphaの値で透明度を指定）
 (add-to-list 'default-frame-alist '(alpha . (0.85 0.85)))
@@ -265,8 +266,13 @@ load-path))
 ;; (auto-compile-on-save-mode)
 ;;--------------------------------------------------------------
 
-(smartparens-global-mode)
 (minimap-mode)
+
+(require 'move-text)
+(move-text-default-bindings)
+(global-set-key [down] 'move-text-down)
+(global-set-key [up] 'move-text-up)
+
 
 (load-theme 'monokai t)
 (custom-set-variables
