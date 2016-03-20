@@ -1,6 +1,7 @@
 (when load-file-name
   (setq user-emacs-directory (file-name-directory load-file-name)))
 
+
 ;;; ロードパスの追加
  (setq load-path (append
                   '("~/.emacs.d/elpa"
@@ -285,7 +286,7 @@ load-path))
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 
 
-;;Themeの設定
+;;Themeの設定==============================================================================
 (load-theme 'deeper-blue t)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -303,3 +304,5 @@ load-path))
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+;;=============================================================================================
