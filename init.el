@@ -186,6 +186,14 @@ load-path))
 (when (equal window-system 'w32)
 (setq default-directory "C:/Users/takeshi/"))
 
+;;IME
+(when (equal window-system 'x)
+(require 'mozc)
+(require 'mozc-popup)
+(set-language-environment "Japanese")
+(setq default-input-method "japanese-mozc")
+(setq mozc-candidate-style 'popup))
+
 ;;================================================  emacs環境の設定 終わり
 
 ;;パッケージ管理 package
