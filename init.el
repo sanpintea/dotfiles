@@ -293,6 +293,11 @@ load-path))
       t)
 (define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 
+;;web-mode
+(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.html?$"     . web-mode))
+
+(setq auto-compile-mode -1)
 
 ;;Themeの設定==============================================================================
 (load-theme 'deeper-blue t)
