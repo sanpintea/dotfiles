@@ -2,8 +2,8 @@ set number
 set cursorline
 set laststatus=2
 set showmatch
-set list
-set listchars=tab:▸\ ,eol:↲,extends:❯,precedes:❮
+"set list
+"set listchars=tab:\ ,eol:,extends:,precedes:
 set backspace=indent,eol,start
 set whichwrap=b,s,h,l,<,>,[,]
 set confirm
@@ -11,6 +11,15 @@ set hidden
 set nobackup
 set noswapfile
 set tabstop=4
+"set encoding=utf-8
+"set termencoding=utf-8
+set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
+set fileformats=unix,dos,mac
+set guifont=Ricty_Diminished:h12
+set guifontwide=Ricty_Diminished:h12
+set iminsert=0
+set imsearch=-1
+set lines=50
 
 " neobundle settings {{{
 if has('vim_starting')
@@ -31,6 +40,9 @@ let g:neobundle_default_git_protocol='https'
 NeoBundleFetch 'Shougo/neobundle.vim'
 " ↓こんな感じが基本の書き方
 NeoBundle 'bundle/tern_for_vim'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'othree/html5.vim'
+NeoBundle 'itchyny/lightline.vim'
 NeoBundle 'fatih/vim-go'
 NeoBundle 'mattn/emmet-vim'
 NeoBundle 'nanotech/jellybeans.vim'
@@ -82,3 +94,71 @@ set t_Co=256
 syntax on
 colorscheme jellybeans
 filetype plugin on
+
+" lightlineの設定  これステータスバーを綺麗にする
+let g:lightline = {
+        \ 'colorscheme': 'jellybeans',
+        \ 'mode_map': {'c': 'NORMAL'},
+        \ 'active': {
+        \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+        \ },
+        \ 'component_function': {
+        \   'modified': 'LightLineModified',
+        \   'readonly': 'LightLineReadonly',
+        \   'fugitive': 'LightLineFugitive',
+        \   'filename': 'LightLineFilename',
+        \   'fileformat': 'LightLineFileformat',
+        \   'filetype': 'LightLineFiletype',
+        \   'fileencoding': 'LightLineFileencoding',
+        \   'mode': 'LightLineMode'
+        \ }
+        \ }
+
+function! LightLineModified()
+  return &ft =~ 'help\|vimfiler\|gundo' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! LightLineReadonly()
+  return &ft !~? 'help\|vimfiler\|gundo' && &readonly ? 'x' : ''
+endfunction
+
+function! LightLineFilename()
+  return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \  &ft == 'unite' ? unite#get_status_string() :
+        \  &ft == 'vimshell' ? vimshell#get_status_string() :
+        \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+        \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+endfunction
+
+function! LightLineFugitive()
+  try
+    if &ft !~? 'vimfiler\|gundo' && exists('*fugitive#head')
+      return fugitive#head()
+    endif
+  catch
+  endtry
+  return ''
+endfunction
+
+function! LightLineFileformat()
+  return winwidth(0) > 70 ? &fileformat : ''
+endfunction
+
+function! LightLineFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype : 'no ft') : ''
+endfunction
+
+function! LightLineFileencoding()
+  return winwidth(0) > 70 ? (strlen(&fenc) ? &fenc : &enc) : ''
+endfunction
+
+function! LightLineMode()
+  return winwidth(0) > 60 ? lightline#mode() : ''
+endfunction
+"lightline end
+
+call plug#begin('~/.vim/plugged')
+Plug 'lambdalisue/vim-gita'
+call plug#end()
+
