@@ -1,45 +1,3 @@
-(when load-file-name
-  (setq user-emacs-directory (file-name-directory load-file-name)))
-
-
-;;; ロードパスの追加
- (setq load-path (append
-                  '("~/.emacs.d/elpa"
-                    "~/.emacs.d/el-get"
-                    )
-load-path))
-
-;;パッケージ管理 el-getの設定
-
-(add-to-list 'load-path (locate-user-emacs-file "~/.emacs.d/el-get/el-get"))
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
-    (goto-char (point-max))
-    (eval-print-last-sexp)))
-
-;;パッケージインストールリスト
-(el-get-bundle web-mode)
-(el-get-bundle ace-jump-mode)
-(el-get-bundle minimap)
-(el-get-bundle pkg-info)
-(el-get-bundle yasnippet)
-(el-get-bundle emmet-mode)
-(el-get-bundle helm)
-(el-get-bundle ac-js2)
-(el-get-bundle company)
-(el-get-bundle popup)
-(el-get-bundle js2-mode)
-(el-get-bundle company-tern)
-(el-get-bundle anzu)
-(el-get-bundle diminish)
-(el-get-bundle rainbow-delimiters)
-(el-get-bundle auto-complete)
-(el-get-bundle auto-compile)
-(el-get-bundle migemo)
-
-
 ;;======================================  emacs環境の設定 始まり
 ;;;対応するカッコを強調表示
 (show-paren-mode t)
@@ -183,10 +141,11 @@ load-path))
         '(:eval (format my-mode-line-format
                         (count-lines (point-max) (point-min))))))
 
+;;windowsの場合にWorkingDirectoryをHOMEへ移動する
 (when (equal window-system 'w32)
 (setq default-directory "C:/Users/takeshi/"))
 
-;;IME
+;;LinuxでのIME設定
 (when (equal window-system 'x)
 (require 'mozc)
 (require 'mozc-popup)
@@ -194,45 +153,70 @@ load-path))
 (setq default-input-method "japanese-mozc")
 (setq mozc-candidate-style 'popup))
 
+;;ビープ音ではなく画面をフラッシュする
+(setq visible-bell t)
+
+;;Theme設定
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(load-theme 'monokai t)
+;; 選択範囲の色を指定
+(set-face-background 'region "SkyBlue")
+(set-face-foreground 'region "black")
+;; マウスポインタの色を設定します。
+(add-to-list 'default-frame-alist '(mouse-color . "SlateBlue2"))
+;; カーソルの色を設定します。
+(add-to-list 'default-frame-alist '(cursor-color . "green"))
+
+
+
 ;;================================================  emacs環境の設定 終わり
+
+ (setq load-path (append
+                  '("~/.emacs.d/elpa"
+                    "~/.emacs.d/el-get"
+                    )
+                  load-path))
+
+
+
+;;パッケージ管理 el-get
+(add-to-list 'load-path (locate-user-emacs-file "~/.emacs.d/el-get/el-get"))
+(unless (require 'el-get nil 'noerror)
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
+    (goto-char (point-max))
+    (eval-print-last-sexp)))
+
+(el-get-bundle 'tern)
+(el-get-bundle 'company)
+(el-get-bundle 'company-tern)
+(el-get-bundle 'color-theme)
+
+
 
 ;;パッケージ管理 package
 (require 'package) ;; You might already have this line
-;;(add-to-list 'package-archives
+
+;;(add-to-list 'package-archives 
 ;;             '("melpa" . "https://melpa.org/packages/"))
-;; (when (< emacs-major-version 24)
-;;   ;; For important compatibility libraries like cl-lib
-;;   (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
-;;   )
-
-
-;;(add-to-list 'package-archives
-;;            '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-;;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
 
 (add-to-list 'package-archives
-'("melpa-stable" . "http://melpa-stable.milkbox.net/packages/") t)
+            '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+;;(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+
+;; (add-to-list 'package-archives
+;; '("melpa-Stable" . "http://melpa-stable.milkbox.net/packages/") t)
 
 (package-initialize) ;; You might already have this line
 
 
-;;パッケージ毎の設定
-;;; smooth-scroll
-(require 'smooth-scroll)
-(smooth-scroll-mode t)
+;;パッケージの設定
 
-(require 'yasnippet)
-(setq yas-snippet-dirs
-      '("~/.emacs.d/mySnippets" 
-        ))
-
-;; yas起動
-(yas-global-mode 1)
-
+;; diminish
 (require 'diminish)
-(require 'tern)
-(require 'anzu)
 
+;; company-mode
 (global-company-mode) ; 全バッファで有効にする 
 (setq company-idle-delay 0.3) ; デフォルトは0.5
 (setq company-minimum-prefix-length 2) ; デフォルトは4
@@ -244,17 +228,15 @@ load-path))
   "Return depth attribute for CANDIDATE. 'nil' entries are treated as 0."
   (let ((depth (get-text-property 0 'depth candidate)))
     (if (eq depth nil) 0 depth)))
-;;(add-hook 'js2-mode-hook 'tern-mode) ; 自分が使っているjs用メジャーモードに変える
+;;(add-hook 'js2-mode-hook 'tern-mode) ; 私が使っているjs用メジャーモードに変える
 (add-to-list 'company-backends 'company-tern) ; backendに追加
+(diminish 'company-mode "Cmp")
+(tern-mode t)
 
-;(require 'js2-mode)
-;(add-to-list 'auto-mode-alist '("\\.js\\" . js2-mode))
-
+;; anzu
+(require 'anzu)
 (global-anzu-mode +1)
 (diminish 'anzu-mode "az")
-(diminish 'company-mode "Cmp")
-(diminish 'helm-mode "h")
-
 
 ;;migemo-----------------------------------------------------
 (require 'migemo)
@@ -270,37 +252,23 @@ load-path))
 (load-library "migemo")
 (migemo-init)
 ;;--------------------------------------------------------------
-;;auto-compile
-;; (setq load-prefer-newer t)
-;; (package-initialize)
-;; (require 'auto-compile)
-;; (auto-compile-on-save-mode)
-;;--------------------------------------------------------------
-
-
-
-;;move-text
-(require 'move-text)
-(move-text-default-bindings)
-(global-set-key [down] 'move-text-down)
-(global-set-key [up] 'move-text-up)
-
-;;ace-jump-mode
-(autoload
-      'ace-jump-mode
-      "ace-jump-mode"
-      "Emacs quick move minor mode"
-      t)
-(define-key global-map (kbd "C-c SPC") 'ace-jump-mode)
 
 ;;web-mode
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.html?$"     . web-mode))
 
-(setq auto-compile-mode -1)
+;;helm
+(require 'helm-config)
+(helm-mode 1)
+(diminish 'helm-mode " h")
 
-;;Themeの設定==============================================================================
-(load-theme 'deeper-blue t)
+;;color-theme
+;; (require 'color-theme)
+;; (color-theme-almost-monokai)
+
+(require 'ace-jump-mode)
+(global-set-key (kbd "C-c SPC") 'ace-jump-mode)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -308,14 +276,15 @@ load-path))
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "38ba6a938d67a452aeb1dada9d7cdeca4d9f18114e9fc8ed2b972573138d4664" default)))
- '(minimap-always-recenter nil)
- '(minimap-window-location (quote right)))
+    ("0c49a9e22e333f260126e4a48539a7ad6e8209ddda13c0310c8811094295b3a3" default)))
+ '(package-archives
+   (quote
+    (("melpa" . "https://melpa.org/packages/")
+     ("ELPA" . "http://tromey.com/elpa/")
+     ("melpa-Stable" . "http://melpa-stable.milkbox.net/packages/")))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
-;;=============================================================================================
