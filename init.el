@@ -78,7 +78,7 @@ load-path))
 (global-set-key "\C-x\C-b" 'buffer-menu)
 
 ;;; 現在行を目立たせる
-(global-hl-line-mode)
+:(global-hl-line-mode)
 
 ;;; カーソルの位置が何文字目かを表示する
 (column-number-mode t)
@@ -190,6 +190,7 @@ load-path))
 (when (equal window-system 'x)
 (require 'mozc)
 (require 'mozc-popup)
+
 (set-language-environment "Japanese")
 (setq default-input-method "japanese-mozc")
 (setq mozc-candidate-style 'popup))
