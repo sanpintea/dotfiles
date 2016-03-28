@@ -199,8 +199,8 @@
 ;;パッケージ管理 package
 (require 'package) ;; You might already have this line
 
-;;(add-to-list 'package-archives 
-;;             '("melpa" . "https://melpa.org/packages/"))
+(add-to-list 'package-archives 
+             '("melpa" . "https://melpa.org/packages/"))
 
 (add-to-list 'package-archives
             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
@@ -270,22 +270,22 @@
 (require 'ace-jump-mode)
 (global-set-key (kbd "C-c SPC") 'ace-jump-mode)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("0c49a9e22e333f260126e4a48539a7ad6e8209ddda13c0310c8811094295b3a3" default)))
- '(package-archives
-   (quote
-    (("melpa" . "https://melpa.org/packages/")
-     ("ELPA" . "http://tromey.com/elpa/")
-     ("melpa-Stable" . "http://melpa-stable.milkbox.net/packages/")))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+;; (custom-set-variables
+;;  ;; custom-set-variables was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(custom-safe-themes
+;;    (quote
+;;     ("0c49a9e22e333f260126e4a48539a7ad6e8209ddda13c0310c8811094295b3a3" default)))
+;;  '(package-archives
+;;    (quote
+;;     (("melpa" . "https://melpa.org/packages/")
+;;      ("ELPA" . "http://tromey.com/elpa/")
+;;      ("melpa-Stable" . "http://melpa-stable.milkbox.net/packages/")))))
+;; (custom-set-faces
+;;  ;; custom-set-faces was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  )
