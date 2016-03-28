@@ -79,11 +79,11 @@
                    '(cursor-type      . box)      ; カーソルの形状
                    '(top . 50) ; ウィンドウの表示位置（Y座標）
                    '(left . 200) ; ウィンドウの表示位置（X座標）
-                   '(width . 100) ; ウィンドウの幅（文字数）
+                   '(width . 80) ; ウィンドウの幅（文字数）
                    '(height . 40) ; ウィンドウの高さ（文字数）
                    )
                   default-frame-alist)))
-(setq initial-frame-alist default-frame-alist )
+(setq initial-frame-alist default-frame-alist)
 
 ;;フォントファミリーの設定
 ;;(frame-parameter nil 'font)をscratchで実行して情報を調べる
@@ -159,6 +159,7 @@
 ;;Theme設定
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (load-theme 'monokai t)
+
 ;; 選択範囲の色を指定
 (set-face-background 'region "SkyBlue")
 (set-face-foreground 'region "black")
@@ -167,11 +168,22 @@
 ;; カーソルの色を設定します。
 (add-to-list 'default-frame-alist '(cursor-color . "green"))
 
+;; find grep
+(setq find-program "C:/MinGW/msys/1.0/bin/find.exe")
+(setq grep-program "C:/MinGW/msys/1.0/bin/grep.exe")
+     
 
-
+ (set-language-environment "UTF-8") 
+  (setq default-input-method "W32-IME")
+  (setq-default w32-ime-mode-line-state-indicator "[--]")
+  (setq w32-ime-mode-line-state-indicator-list '("[--]" "[あ]" "[--]"))
+  (w32-ime-initialize)
+  ;; 日本語入力時にカーソルの色を変える設定 (色は適宜変えてください)
+  (add-hook 'w32-ime-on-hook '(lambda () (set-cursor-color "coral4")))
+  (add-hook 'w32-ime-off-hook '(lambda () (set-cursor-color "green")))
 ;;================================================  emacs環境の設定 終わり
 
- (setq load-path (append
+(setq load-path (append
                   '("~/.emacs.d/elpa"
                     "~/.emacs.d/el-get"
                     )
@@ -209,6 +221,22 @@
 ;; '("melpa-Stable" . "http://melpa-stable.milkbox.net/packages/") t)
 
 (package-initialize) ;; You might already have this line
+(unless (package-installed-p 'package+)
+     (package-install 'package+))
+
+(package-manifest 'diminish
+                  'company
+                  'company-tern
+                  'anzu
+                  'migemo
+                  'web-mode
+                  'helm
+                  'helm-core
+                  'ace-jump-mode
+                  'flycheck
+                  'browse-kill-ring
+                  'smartparens
+                  'magit)
 
 
 ;;パッケージの設定
@@ -266,25 +294,21 @@
 ;; (require 'color-theme)
 ;; (color-theme-almost-monokai)
 
+;; ace-jump-mode
 (require 'ace-jump-mode)
 (global-set-key (kbd "C-c SPC") 'ace-jump-mode)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("0c49a9e22e333f260126e4a48539a7ad6e8209ddda13c0310c8811094295b3a3" default)))
- '(package-archives
-   (quote
-    (("melpa" . "https://melpa.org/packages/")
-     ("ELPA" . "http://tromey.com/elpa/")
-     ("melpa-Stable" . "http://melpa-stable.milkbox.net/packages/")))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+;; flycheck
+(require 'flycheck)
+(global-flycheck-mode +1)
+
+;; browse-kill-ring
+(require 'browse-kill-ring)
+(global-set-key (kbd "C-c k") 'browse-kill-ring)
+
+;; smartparens
+(require 'smartparens-config)
+(smartparens-global-mode t)
+
+;; magit
+(require 'magit)
