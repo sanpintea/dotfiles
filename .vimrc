@@ -16,7 +16,6 @@ set tabstop=4
 set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis
 set fileformats=unix,dos,mac
 set guifont=Ricty\ Diminished\ 12
-"set guifont=MONOSPACE\ 12
 "set guifontwide=Ricty_Diminished:h12
 set iminsert=0
 set imsearch=-1
