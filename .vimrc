@@ -1,3 +1,5 @@
+set visualbell
+set autoread
 set number
 set cursorline
 set laststatus=2
