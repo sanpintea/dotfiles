@@ -3,15 +3,17 @@
 set guioptions-=T
 
 "ƒƒjƒ…[‚ğíœ
-set guioptions-=m
-set guioptions-=r
-set guioptions-=R
-set guioptions-=l
-set guioptions-=L
+"set guioptions-=m
+"set guioptions-=r
+"set guioptions-=R
+"set guioptions-=l
+"set guioptions-=L
 source $VIMRUNTIME/delmenu.vim
 set langmenu=ja_jp.utf-8
 source $VIMRUNTIME/menu.vim
 
+set guifont=Ricty_diminished:h12
+set guifontwide=Ricty_diminished:h12
 set guicursor=a:blinkon0
 set lines=45
 
@@ -19,7 +21,8 @@ set lines=45
 filetype plugin indent on
 set t_Co=256
 syntax on
-
 colorscheme jellybeans
 filetype plugin on
 
+set transparency=5
+autocmd GUIEnter * set transparency=240
