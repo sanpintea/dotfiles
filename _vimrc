@@ -18,7 +18,7 @@ set guifont=Ricty_Diminished:h12
 set guifontwide=Ricty_Diminished:h12
 set iminsert=0
 set imsearch=-1
-set lines=50
+set lines=36
 let $HOME='C:\Users\takeshi'
 cd c:/Users/takeshi
 
